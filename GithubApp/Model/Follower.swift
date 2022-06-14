@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Follower: Codable {
+struct Follower: Codable, Hashable {
     
     var login: String
     var avatarUrl: String //can use camel case, the decoder automatically formats it
