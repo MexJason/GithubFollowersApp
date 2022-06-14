@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func configureLogoImageView() {
@@ -62,7 +62,7 @@ class SearchViewController: UIViewController {
     
     @objc func pushFollowerListVC() {
         
-        guard isUsernameEntered else {return}
+        guard isUsernameEntered else {return presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a username 😃", buttonTitle: "Ok")}
         let followerListVC = FollowerListViewController()
         followerListVC.username = usernameTextField.text
         followerListVC.title = usernameTextField.text
