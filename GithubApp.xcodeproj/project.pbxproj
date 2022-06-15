@@ -27,6 +27,7 @@
 		32A968922858C970002D4E48 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A968912858C970002D4E48 /* ErrorMessage.swift */; };
 		32A968952858E795002D4E48 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A968942858E795002D4E48 /* FollowerCell.swift */; };
 		32A968972858E813002D4E48 /* GHAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A968962858E813002D4E48 /* GHAvatarView.swift */; };
+		32A9689C285A3E39002D4E48 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A9689B285A3E39002D4E48 /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		32A968912858C970002D4E48 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		32A968942858E795002D4E48 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		32A968962858E813002D4E48 /* GHAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHAvatarView.swift; sourceTree = "<group>"; };
+		32A9689B285A3E39002D4E48 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				32A968912858C970002D4E48 /* ErrorMessage.swift */,
+				32A9689B285A3E39002D4E48 /* UIHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				32A968972858E813002D4E48 /* GHAvatarView.swift in Sources */,
 				32A968712857A5FB002D4E48 /* FavoritesViewController.swift in Sources */,
 				32A968922858C970002D4E48 /* ErrorMessage.swift in Sources */,
+				32A9689C285A3E39002D4E48 /* UIHelper.swift in Sources */,
 				32A9688F2858BFB4002D4E48 /* NetworkManager.swift in Sources */,
 				32A9685C2857A17D002D4E48 /* SceneDelegate.swift in Sources */,
 				32A9687B2857D680002D4E48 /* GHBodyLabel.swift in Sources */,
