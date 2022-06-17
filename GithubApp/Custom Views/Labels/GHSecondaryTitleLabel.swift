@@ -1,13 +1,13 @@
 //
-//  GHBodyLabel.swift
+//  GHSecondaryTitleLabel.swift
 //  GithubApp
 //
-//  Created by Jason Dubon on 6/13/22.
+//  Created by Jason Dubon on 6/17/22.
 //
 
 import UIKit
 
-class GHBodyLabel: UILabel {
+class GHSecondaryTitleLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,21 +18,21 @@ class GHBodyLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(textAlignment: NSTextAlignment) {
+    init(fontSize: CGFloat) {
         super.init(frame: .zero)
         
-        self.textAlignment = textAlignment
+        font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
         configure()
         
     }
     
     private func configure() {
         
-        font = UIFont.preferredFont(forTextStyle: .body)
+    
         textColor = .secondaryLabel
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.75
-        lineBreakMode = .byWordWrapping
+        minimumScaleFactor = 0.90
+        lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
         
         // amount of lines can be configured later in VC its being used
