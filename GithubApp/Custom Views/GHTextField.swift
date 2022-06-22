@@ -36,6 +36,7 @@ class GHTextField: UITextField {
         backgroundColor = .tertiarySystemBackground
         autocorrectionType = .no
         returnKeyType = .go
+        clearButtonMode = .whileEditing
         
         placeholder = "Enter Username" // this could be in its own init method, if we need to reuse
         

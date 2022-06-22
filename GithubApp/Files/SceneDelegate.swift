@@ -17,51 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-
-       
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        window?.rootViewController = createTabBar()
+        window?.rootViewController = GHTabBarController()
         window?.makeKeyAndVisible()
         
         configureNavBar()
         
     }
     
-    func createSearchNavigationController() -> UINavigationController {
-        let searchVC = SearchViewController()
-        searchVC.title = "Search"
-        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        
-        return UINavigationController(rootViewController: searchVC)
-        
-    }
-    
-    func createFavoriteNavigationController() -> UINavigationController {
-        let favoriteVC = FavoritesViewController()
-        favoriteVC.title = "Favorites"
-        favoriteVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        
-        return UINavigationController(rootViewController: favoriteVC)
-        
-    }
-    
-    func createTabBar() -> UITabBarController {
-        
-        let tabBar = UITabBarController()
-        UITabBar.appearance().tintColor = .darkGray
-        
-        let searchNC = createSearchNavigationController()
-        let favoriteNC = createFavoriteNavigationController()
-        
-        tabBar.setViewControllers([searchNC, favoriteNC], animated: true)
-        
-        return tabBar
-        
-    }
+  
     
     func configureNavBar() {
         
@@ -93,9 +60,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+   
     }
 
 
