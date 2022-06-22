@@ -19,13 +19,11 @@ class GHButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(color: UIColor, title: String) {
-        super.init(frame: .zero)
+    convenience init(color: UIColor, title: String) {
+        self.init(frame: .zero)
         
         self.backgroundColor = color
         self.setTitle(title, for: .normal)
-        configure()
-        
     }
     
     private func configure() {

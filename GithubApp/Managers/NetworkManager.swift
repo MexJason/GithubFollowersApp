@@ -99,6 +99,7 @@ class NetworkManager {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 let user = try decoder.decode(User.self, from: data)
                 completion(.success(user))
             } catch {
@@ -112,5 +113,42 @@ class NetworkManager {
         task.resume()
     }
     
+    func downloadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+        
+        let keyCache = NSString(string: urlString)
+        if let image = cache.object(forKey: keyCache) {
+            completion(image)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+            
+        }
+        // not handling errors, the place holder will handle the errors and will show too many images. doesnt make sense to throw errors to user
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self, error == nil, let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data else {
+                completion(nil)
+                return
+            }
+        
+            guard let image = UIImage(data: data) else {
+                completion(nil)
+                return
+            }
+            
+            self.cache.setObject(image, forKey: keyCache)
+            
+            completion(image)
+            
+            
+        }
+        
+        task.resume()
+        
+        
+    }
     
 }
