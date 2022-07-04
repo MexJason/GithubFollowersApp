@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321E2D5C28737C8100D415B3 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E2D5B28737C8100D415B3 /* UIView+Ext.swift */; };
+		321E2D5E2873863C00D415B3 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E2D5D2873863C00D415B3 /* UITableView+Ext.swift */; };
 		329BEC10286383D0009695A2 /* GHTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329BEC0F286383D0009695A2 /* GHTabBarController.swift */; };
 		329BEC122863B0B5009695A2 /* GHAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329BEC112863B0B5009695A2 /* GHAlertContainerView.swift */; };
 		329BEC142863B9D1009695A2 /* GHDataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329BEC132863B9D1009695A2 /* GHDataLoadingViewController.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		321E2D5B28737C8100D415B3 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		321E2D5D2873863C00D415B3 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		329BEC0F286383D0009695A2 /* GHTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHTabBarController.swift; sourceTree = "<group>"; };
 		329BEC112863B0B5009695A2 /* GHAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHAlertContainerView.swift; sourceTree = "<group>"; };
 		329BEC132863B9D1009695A2 /* GHDataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHDataLoadingViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 				32A968822857E154002D4E48 /* UIViewController+Ext.swift */,
 				32A968DB285CEF7B002D4E48 /* Date+Ext.swift */,
 				32A968DD285CEFAF002D4E48 /* String+Ext.swift */,
+				321E2D5B28737C8100D415B3 /* UIView+Ext.swift */,
+				321E2D5D2873863C00D415B3 /* UITableView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -230,7 +236,6 @@
 				32A968D8285CE8D7002D4E48 /* ItemInfo */,
 				32A968962858E813002D4E48 /* GHAvatarView.swift */,
 				32A968C6285CB76A002D4E48 /* GHHeaderInfoViewController.swift */,
-				32A968CC285CDC6A002D4E48 /* GHInfoItemView.swift */,
 				329BEC132863B9D1009695A2 /* GHDataLoadingViewController.swift */,
 			);
 			path = Views;
@@ -257,6 +262,7 @@
 		32A968D8285CE8D7002D4E48 /* ItemInfo */ = {
 			isa = PBXGroup;
 			children = (
+				32A968CC285CDC6A002D4E48 /* GHInfoItemView.swift */,
 				32A968D2285CE21C002D4E48 /* GHItemInfoViewController.swift */,
 				32A968D6285CE88B002D4E48 /* GHFollowerItemViewController.swift */,
 				32A968D4285CE6AC002D4E48 /* GHRepoItemViewController.swift */,
@@ -345,6 +351,7 @@
 				32A9685E2857A17D002D4E48 /* TabBarController.swift in Sources */,
 				32A968CD285CDC6A002D4E48 /* GHInfoItemView.swift in Sources */,
 				32A968D7285CE88B002D4E48 /* GHFollowerItemViewController.swift in Sources */,
+				321E2D5E2873863C00D415B3 /* UITableView+Ext.swift in Sources */,
 				32A968DC285CEF7B002D4E48 /* Date+Ext.swift in Sources */,
 				32A9687D2857D733002D4E48 /* GHAlertViewController.swift in Sources */,
 				32A9688B2858B9DE002D4E48 /* User.swift in Sources */,
@@ -366,6 +373,7 @@
 				32A9685C2857A17D002D4E48 /* SceneDelegate.swift in Sources */,
 				32A968D5285CE6AC002D4E48 /* GHRepoItemViewController.swift in Sources */,
 				32A968C7285CB76A002D4E48 /* GHHeaderInfoViewController.swift in Sources */,
+				321E2D5C28737C8100D415B3 /* UIView+Ext.swift in Sources */,
 				32A9687B2857D680002D4E48 /* GHBodyLabel.swift in Sources */,
 				329BEC142863B9D1009695A2 /* GHDataLoadingViewController.swift in Sources */,
 				32A968CB285CC2DF002D4E48 /* Constants.swift in Sources */,

@@ -27,6 +27,7 @@ class GHBodyLabel: UILabel {
     private func configure() {
         
         font = UIFont.preferredFont(forTextStyle: .body)
+        adjustsFontForContentSizeCategory = true
         textColor = .secondaryLabel
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75

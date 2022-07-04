@@ -37,12 +37,7 @@ class GHHeaderInfoViewController: UIViewController {
     }
     
     func addSubviews() {
-        view.addSubview(avatarImageView)
-        view.addSubview(usernameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
+        view.addSubviews(avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel)
     }
     
     func configure() {
@@ -58,7 +53,7 @@ class GHHeaderInfoViewController: UIViewController {
 
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "No Name"
-        locationImageView.image = UIImage(systemName: SFSymbols.location)
+        locationImageView.image = SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
         locationLabel.text = user.location ?? "Earth"
         bioLabel.text = user.bio ?? "Who's asking?"
@@ -99,7 +94,7 @@ class GHHeaderInfoViewController: UIViewController {
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePad),
             bioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60),
+            bioLabel.heightAnchor.constraint(equalToConstant: 90),
             
             
 

@@ -37,7 +37,7 @@ class FavoritesViewController: GHDataLoadingViewController {
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+        tableView.removeExcessCells()
         tableView.frame = view.bounds
         tableView.rowHeight = 80
         
@@ -108,13 +108,14 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard editingStyle == .delete else {return}
         
         let favorite = favorites[indexPath.row]
-        favorites.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
         
         PersistenceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
             guard let self = self else {return}
             
             guard let error = error else {
+                
+                self.favorites.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
                 return
             }
             self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
@@ -123,3 +124,5 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+

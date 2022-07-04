@@ -8,13 +8,15 @@
 import UIKit
 
 protocol UserInfoViewControllerDelegate: AnyObject {
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+    func didRequestFollowers(for username: String)
 }
 
 class UserInfoViewController: GHDataLoadingViewController {
 
-    weak var delegate: FollowerListViewControllerDelegate?
+    weak var delegate: UserInfoViewControllerDelegate?
+
+    let scrollView = UIScrollView()
+    let contentView = UIView()
     
     let headerView = UIView()
     let itemViewOne = UIView()
@@ -31,6 +33,7 @@ class UserInfoViewController: GHDataLoadingViewController {
         super.viewDidLoad()
         
         configureVC()
+        configureScrollView()
         layoutViews()
         getUserInfo()
         
@@ -41,6 +44,29 @@ class UserInfoViewController: GHDataLoadingViewController {
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+        
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 650)
+        ])
+        
+        contentView.pinToEdges(of: scrollView)
+        
+        
     }
     
     private func getUserInfo() {
@@ -75,10 +101,7 @@ class UserInfoViewController: GHDataLoadingViewController {
     }
     
     func layoutViews() {
-        view.addSubview(headerView)
-        view.addSubview(itemViewOne)
-        view.addSubview(itemViewTwo)
-        view.addSubview(dateLabel)
+        contentView.addSubviews(headerView, itemViewOne, itemViewTwo, dateLabel)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         itemViewOne.translatesAutoresizingMaskIntoConstraints = false
@@ -89,23 +112,23 @@ class UserInfoViewController: GHDataLoadingViewController {
         
         NSLayoutConstraint.activate([
         
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
-            itemViewOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            itemViewOne.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            itemViewOne.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            itemViewOne.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
             
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: 20),
-            itemViewTwo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            itemViewTwo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            itemViewTwo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            itemViewTwo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
         
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: 20),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18),
+            dateLabel.heightAnchor.constraint(equalToConstant: 50),
             dateLabel.centerXAnchor.constraint(equalTo: itemViewTwo.centerXAnchor)
             
         ])
@@ -131,7 +154,7 @@ class UserInfoViewController: GHDataLoadingViewController {
 
 }
 
-extension UserInfoViewController: UserInfoViewControllerDelegate {
+extension UserInfoViewController: GHFollowerItemViewControllerDelegate, GHRepoItemViewControllerDelegate {
     
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {return presentGFAlertOnMainThread(title: "Invalid URL", message: "The url of this user is invalid. Try again.", buttonTitle: "Ok")}
