@@ -60,10 +60,7 @@ class NetworkManager {
                 
                 //completion(nil, .invalidData)
                 completion(.failure(.invalidData))
-            }
-            
-
-            
+            } 
         }
         
         task.resume()
@@ -105,11 +102,7 @@ class NetworkManager {
             } catch {
                 completion(.failure(.invalidData))
             }
-            
-
-            
         }
-        
         task.resume()
     }
     
@@ -142,13 +135,8 @@ class NetworkManager {
             self.cache.setObject(image, forKey: keyCache)
             
             completion(image)
-            
-            
         }
-        
         task.resume()
-        
-        
     }
     
 }

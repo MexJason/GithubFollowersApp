@@ -8,7 +8,6 @@
 import UIKit
 
 enum UIHelper {
-    
     //this can be placed outside of View conroller
     static func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
         
