@@ -26,7 +26,7 @@ class GHRepoItemViewController: GHItemInfoViewController {
         itemOne.set(itemInfoType: .repos, with: user.publicRepos)
         itemTwo.set(itemInfoType: .gists, with: user.publicGists)
         
-        actionButton.set(backgroundColor: .systemPurple, title: "Github Profile")
+        actionButton.set(color: .systemPurple, title: "Github Profile")
         
     }
     

@@ -119,31 +119,57 @@ class FollowerListViewController: GHDataLoadingViewController {
         showLoadingView()
         isLoadingFollowers = true
         
-        // need to use a switch statment to handle result/error
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else {return}
-            
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                if followers.count < 100 {self.hasMoreFollowers = false}
+//        // need to use a switch statment to handle result/error
+//        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
+//            guard let self = self else {return}
+//
+//            self.dismissLoadingView()
+//
+//            switch result {
+//            case .success(let followers):
+//                if followers.count < 100 {self.hasMoreFollowers = false}
+//                self.followers.append(contentsOf: followers)
+//
+//                if self.followers.isEmpty {
+//                    let message = "This user does not have any followers :(. Share a follow?"
+//                    DispatchQueue.main.async {
+//                        self.showEmptyStateView(with: message, in: self.view)
+//                    }
+//                }
+//                self.updateData(on: followers)
+//            case .failure(let error):
+//                self.presentGFAlertOnMainThread(title: "Network Error", message: error.rawValue, buttonTitle: "Ok")
+//            }
+//
+//            self.isLoadingFollowers = false
+//        }
+        
+        Task {
+            do {
+                // function needs to be marked async or wrap in a Task
+                let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                dismissLoadingView()
+                if followers.count < 100 {hasMoreFollowers = false}
                 self.followers.append(contentsOf: followers)
                 
-                if self.followers.isEmpty {
+                if followers.isEmpty {
                     let message = "This user does not have any followers :(. Share a follow?"
                     DispatchQueue.main.async {
                         self.showEmptyStateView(with: message, in: self.view)
                     }
                 }
-                self.updateData(on: followers)
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Network Error", message: error.rawValue, buttonTitle: "Ok")
+                updateData(on: followers)
+            } catch {
+                // handle errors
+                if let errorMsg = error as? ErrorMessage {
+                    presentGFAlertOnMainThread(title: "Network Error", message: errorMsg.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
             }
-    
-            self.isLoadingFollowers = false
+            dismissLoadingView()
         }
-
+            self.isLoadingFollowers = false
     }
     
     func configureDataSource() {

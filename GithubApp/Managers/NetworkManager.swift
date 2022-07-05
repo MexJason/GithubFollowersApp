@@ -18,52 +18,77 @@ class NetworkManager {
     let cache = NSCache<NSString, UIImage>()
     
     private init() {}
+
+//    func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], ErrorMessage>) -> Void) {
+//
+//        let endPoint = "\(baseURL)\(username)/followers?per_page=\(perPageFollowers)&page=\(page)"
+//
+//        guard let url = URL(string: endPoint) else {
+//            //completion(nil, .invalidUsername)
+//            completion(.failure(.invalidUsername))
+//            return
+//        }
+//
+//        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//
+//            if let _  = error {
+//                //completion(nil, .unableToComplete)
+//                completion(.failure(.unableToComplete))
+//                return
+//            }
+//
+//            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                //completion(nil, .invalidResponse)
+//                completion(.failure(.invalidResponse))
+//                return
+//            }
+//
+//            guard let data = data else {
+//                //completion(nil, .invalidResponse)
+//                completion(.failure(.invalidResponse))
+//                return
+//            }
+//
+//
+//            do {
+//                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+//                let followers = try decoder.decode([Follower].self, from: data)
+//                //completion(followers, nil)
+//                completion(.success(followers))
+//            } catch {
+//
+//                //completion(nil, .invalidData)
+//                completion(.failure(.invalidData))
+//            }
+//        }
+//
+//        task.resume()
+//    }
     
-    func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], ErrorMessage>) -> Void) {
+    func getFollowers(for username: String, page: Int) async throws -> [Follower] {
         
         let endPoint = "\(baseURL)\(username)/followers?per_page=\(perPageFollowers)&page=\(page)"
         
         guard let url = URL(string: endPoint) else {
-            //completion(nil, .invalidUsername)
-            completion(.failure(.invalidUsername))
-            return
+            throw ErrorMessage.invalidUsername
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            if let _  = error {
-                //completion(nil, .unableToComplete)
-                completion(.failure(.unableToComplete))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                //completion(nil, .invalidResponse)
-                completion(.failure(.invalidResponse))
-                return
-            }
-
-            guard let data = data else {
-                //completion(nil, .invalidResponse)
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let followers = try decoder.decode([Follower].self, from: data)
-                //completion(followers, nil)
-                completion(.success(followers))
-            } catch {
-                
-                //completion(nil, .invalidData)
-                completion(.failure(.invalidData))
-            } 
+        let (data, response) = try await URLSession.shared.data(from: url)
+    
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw ErrorMessage.invalidResponse
         }
         
-        task.resume()
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let followers = try decoder.decode([Follower].self, from: data)
+            return followers
+        } catch {
+            throw ErrorMessage.invalidData
+        }
+   
     }
     
     func getUsers(for username: String, completion: @escaping (Result<User, ErrorMessage>) -> Void) {
