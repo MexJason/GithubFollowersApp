@@ -169,7 +169,7 @@ class FollowerListViewController: GHDataLoadingViewController {
             }
             dismissLoadingView()
         }
-            self.isLoadingFollowers = false
+            isLoadingFollowers = false
     }
     
     func configureDataSource() {
